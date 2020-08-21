@@ -15,7 +15,8 @@ set yrange[-7:7]
 
 
 
-set object 1 circle at 0, 0 fc rgb 'white' size 0.06 fs solid front
+set object 1 circle at 0, 0 fc rgb 'grey' size 0.06 fs solid front
+set object 2 circle at 0, 0 fc rgb 'black' size 0.1 fs solid front
 
 do for [ii=1:2001] {
      
@@ -25,14 +26,11 @@ do for [ii=1:2001] {
      plot 'dbpen.dat' using 5:6:7 every ::1::ii w l lt 1 lw 1.5 lc palette 
      plot 'dbpen.dat' using 5:6 every ::ii::ii w p pt 7 ps 4 lc rgb  "green"
      
+     plot 'dbpen.dat' using 3:4 every ::ii::ii w p pt 7 ps 4 lc rgb "green"
      
      plot 'dbpen.dat' u 1:2:($3-$1):($4-$2) every ::ii::ii w vec nohead lw 8 lc rgb "green" 
      plot "dbpen.dat" u 3:4:($5-$3):($6-$4) every ::ii::ii with vectors nohead lw 8 lc rgb "green"
-     
-     
-     plot 'dbpen.dat' using 3:4 every ::ii::ii w p pt 7 ps 4 lc rgb "green"
     
-     
     
      unset multiplot
       
