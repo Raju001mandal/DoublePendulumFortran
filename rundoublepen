@@ -1,4 +1,3 @@
-
 set terminal wxt background 'black'
 
 unset key
@@ -10,30 +9,44 @@ unset border
 set palette rgb 33,13,10
 unset colorbox
 
-set xrange[-8:8]
-set yrange[-7:7]
+set xrange[-12:12]
+set yrange[-10:8]
 
+set palette defined (0 0 0 0, 1 0 0 1, 3 0 1 0, 4 1 0 0, 6 1 1 1)
+set title 'set palette defined (0 0 0 0, 1 0 0 1, 3 0 1 0, 4 1 0 0, 6 1 1 1)'
 
+set object 1 circle at 0, 0 fc rgb 'grey' size 0.5 fs solid front
+set object 2 circle at 0, 0 fc rgb 'black' size 0.3 fs solid front
 
-set object 1 circle at 0, 0 fc rgb 'white' size 0.06 fs solid front
-
-do for [ii=1:2001] {
+do for [ii=1:10001:2] {
      
      set multiplot layout 1,1
      
-     set pm3d lighting primary 0.5 specular 0.2 
-     plot 'dbpen.dat' using 3:4:5 every ::1::ii w l lt 1 lw 1.5 lc palette 
-     plot 'dbpen.dat' using 3:4 every ::ii::ii w p pt 7 ps 4 lc rgb  "green"
      
-    
-     plot 'dbpen.dat' using 1:2 every ::1::ii w l lt 1 lw 0.5 lc rgb "white"
-     plot 'dbpen.dat' using 1:2 every ::ii::ii w p pt 7 ps 3 lc rgb "white"
-    
-     
-    
-     unset multiplot
+     plot 'dbpen5.dat' using 5:6:7 every ::ii-40::ii w l lt 1 lw 2 lc rgb "green" ,\
+          'dbpen5.dat' using 5:6 every ::ii::ii w p pt 7 ps 3 lc rgb  "green"  ,\
+          'dbpen5.dat' using 3:4 every ::ii::ii w p pt 7 ps 3 lc rgb "green" ,\
+          'dbpen5.dat' u 1:2:($3-$1):($4-$2) every ::ii::ii w vec nohead lw 6 lc rgb "green"  ,\
+          "dbpen5.dat" u 3:4:($5-$3):($6-$4) every ::ii::ii with vectors nohead lw 6 lc rgb "green" ,\
+          'dbpen6.dat' using 5:6:7 every ::ii-40::ii w l lt 1 lw 2 lc rgb "yellow" ,\
+          'dbpen6.dat' using 5:6 every ::ii::ii w p pt 7 ps 3 lc rgb  "yellow"  ,\
+          'dbpen6.dat' using 3:4 every ::ii::ii w p pt 7 ps 3 lc rgb "yellow" ,\
+          'dbpen6.dat' u 1:2:($3-$1):($4-$2) every ::ii::ii w vec nohead lw 6 lc rgb "yellow"  ,\
+          "dbpen6.dat" u 3:4:($5-$3):($6-$4) every ::ii::ii with vectors nohead lw 6 lc rgb "yellow" ,\
+          'dbpen7.dat' using 5:6:7 every ::ii-40::ii w l lt 1 lw 2 lc rgb "white" ,\
+          'dbpen7.dat' using 5:6 every ::ii::ii w p pt 7 ps 3 lc rgb  "white"  ,\
+          'dbpen7.dat' using 3:4 every ::ii::ii w p pt 7 ps 3 lc rgb "white" ,\
+          'dbpen7.dat' u 1:2:($3-$1):($4-$2) every ::ii::ii w vec nohead lw 6 lc rgb "white"  ,\
+          "dbpen7.dat" u 3:4:($5-$3):($6-$4) every ::ii::ii with vectors nohead lw 6 lc rgb "white"  
+          
       
-    
+     
+   
+     
+     
+     unset multiplot
+     
+     
 }
-     
-     
+
+
